@@ -1,0 +1,84 @@
+@use "../../styles/mixins" as *;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  padding-bottom: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(55% 60% at 88% 20%, rgba(239, 196, 182, 0.7), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, rgba(242, 165, 65, 0.16), transparent 70%);
+}
+
+.plain .wash {
+  background: radial-gradient(50% 60% at 90% 0%, rgba(239, 196, 182, 0.45), transparent 70%);
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.split {
+  @include up($md) {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 4rem;
+  }
+}
+
+.copy {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  line-height: 0.98;
+  max-width: 16ch;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.lede {
+  font-size: var(--fs-md);
+  color: var(--fg-2);
+  max-width: 52ch;
+}
+
+.media {
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
+  @include up($md) {
+    justify-self: end;
+  }
+}
+
+.arch {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px var(--r-media) var(--r-media);
+  overflow: hidden;
+  box-shadow: var(--sh-3);
+  img {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+}
+
+.aside {
+  min-width: 0;
+  width: 100%;
+}

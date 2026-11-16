@@ -1,0 +1,100 @@
+@use "../../styles/mixins" as *;
+
+.card {
+  min-width: 0;
+}
+
+.link {
+  display: grid;
+  gap: 1rem;
+  @include focus-ring(4px);
+  @include hover {
+    img {
+      transform: scale(1.04);
+    }
+    .title {
+      background-size: 100% 1px;
+    }
+  }
+}
+
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--c-cream-300);
+  img {
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+}
+
+.body {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--fg-3);
+}
+
+.cat {
+  padding: 3px 9px;
+  border-radius: var(--r-chip);
+  background: var(--c-cream-200);
+  color: var(--fg-2);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.15;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size var(--d-ui) var(--ease-out);
+  display: inline;
+}
+
+.excerpt {
+  color: var(--fg-2);
+  font-size: 0.925rem;
+}
+
+.lg {
+  .media {
+    aspect-ratio: 5 / 4;
+    border-radius: 999px 999px var(--r-media) var(--r-media);
+  }
+  .title {
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
+  }
+}
+
+.row {
+  .link {
+    grid-template-columns: 120px minmax(0, 1fr);
+    align-items: center;
+    gap: 1.1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+    @include up($sm) {
+      grid-template-columns: 170px minmax(0, 1fr);
+    }
+  }
+  .media {
+    aspect-ratio: 1;
+    border-radius: 18px;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+}

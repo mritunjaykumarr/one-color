@@ -1,0 +1,86 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: grid;
+  gap: 2rem;
+}
+
+.chips {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 40px;
+  padding: 0 0.55rem 0 1rem;
+  border-radius: var(--r-chip);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--d-micro) var(--ease-out), color var(--d-micro) var(--ease-out);
+  @include focus-ring(2px);
+  @include hover {
+    background: var(--c-cream-200);
+  }
+  span {
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--r-chip);
+    background: var(--c-cream-200);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+}
+
+.on {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: none;
+  @include hover {
+    background: var(--fg);
+  }
+  span {
+    background: rgba(251, 243, 234, 0.18);
+    color: var(--bg);
+  }
+}
+
+.layout {
+  display: grid;
+  gap: 3rem;
+}
+
+.lead {
+  @include up($md) {
+    :global(a) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 3rem;
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem 1.75rem;
+  @include up($sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include up($lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

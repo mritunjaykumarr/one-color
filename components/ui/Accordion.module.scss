@@ -1,0 +1,110 @@
+@use "../../styles/mixins" as *;
+
+.acc {
+  border-top: 1px solid var(--line);
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+.h {
+  font-family: var(--font-body);
+  font-size: inherit;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  text-align: left;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--fg);
+  @include focus-ring(2px);
+  @include hover {
+    .plus {
+      background: var(--fg);
+      &::before,
+      &::after {
+        background: var(--bg);
+      }
+    }
+  }
+}
+
+.plus {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  transition: background-color var(--d-micro) var(--ease-out);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 11px;
+    height: 1.5px;
+    margin: -0.75px 0 0 -5.5px;
+    background: var(--fg);
+    transition: transform var(--d-ui) var(--ease-move), background-color var(--d-micro) var(--ease-out);
+  }
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-move);
+}
+
+.inner {
+  overflow: hidden;
+  min-height: 0;
+  p {
+    padding: 0 3rem 1.4rem 0;
+    color: var(--fg-2);
+    max-width: 62ch;
+  }
+}
+
+.open {
+  .panel {
+    grid-template-rows: 1fr;
+  }
+  .plus::after {
+    transform: rotate(0deg);
+  }
+}
+
+.deep {
+  border-color: var(--line-on-deep);
+  .item {
+    border-color: var(--line-on-deep);
+  }
+  .trigger {
+    color: var(--fg-on-deep);
+  }
+  .plus {
+    box-shadow: inset 0 0 0 1px var(--line-on-deep);
+    &::before,
+    &::after {
+      background: var(--fg-on-deep);
+    }
+  }
+  .inner p {
+    color: var(--fg-on-deep-2);
+  }
+}

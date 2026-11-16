@@ -1,0 +1,155 @@
+@use "../../styles/mixins" as *;
+
+.gallery {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  @include up($md) {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 1rem;
+    position: sticky;
+    top: calc(var(--header-h) + 1.25rem);
+  }
+}
+
+.thumbs {
+  display: none;
+  @include up($md) {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+  }
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--tint);
+  opacity: 0.62;
+  transition: opacity var(--d-micro) var(--ease-out), box-shadow var(--d-micro) var(--ease-out);
+  @include focus-ring(2px);
+  @include hover {
+    opacity: 1;
+  }
+  img {
+    object-fit: cover;
+  }
+}
+
+.thumbOn {
+  opacity: 1;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--fg);
+}
+
+.thumbArt {
+  position: absolute;
+  inset: 12%;
+}
+
+.thumbPlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(28, 11, 14, 0.25);
+}
+
+.stageWrap {
+  position: relative;
+  min-width: 0;
+}
+
+.rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin-inline: calc(var(--gutter) * -1);
+  border-radius: 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @include up($md) {
+    margin-inline: 0;
+    border-radius: var(--r-media);
+    overflow: hidden;
+  }
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 1 / 1.05;
+  scroll-snap-align: start;
+  overflow: hidden;
+  background: var(--tint);
+  @include up($md) {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+.photo {
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+.artStage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(70% 60% at 50% 55%, rgba(255, 250, 244, 0.85), transparent 70%),
+    var(--tint);
+}
+
+.ring {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--hex) 30%, transparent);
+}
+
+.art {
+  position: relative;
+  width: 72%;
+}
+
+.note {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 5px 10px;
+  border-radius: var(--r-chip);
+  background: rgba(255, 250, 244, 0.85);
+  backdrop-filter: blur(6px);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--fg-2);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 0.75rem;
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line-strong);
+    transition: width var(--d-ui) var(--ease-out), background-color var(--d-ui) var(--ease-out);
+  }
+  .dotOn {
+    width: 20px;
+    border-radius: 6px;
+    background: var(--fg);
+  }
+  @include up($md) {
+    display: none;
+  }
+}

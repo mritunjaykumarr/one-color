@@ -1,0 +1,298 @@
+@use "../../styles/mixins" as *;
+
+/* ============================================================
+   OneColor design tokens
+   Primitive → semantic. Warm, light-first ("chai-milk" cream),
+   a deep kohl-plum ink, sindoor-berry for action, marigold for spark.
+   ============================================================ */
+:root {
+  /* primitives */
+  --c-cream-50: #fffaf4;
+  --c-cream-100: #fbf3ea;
+  --c-cream-200: #f6e8da;
+  --c-cream-300: #efd9c4;
+  --c-blush-200: #f6dcd3;
+  --c-blush-300: #efc4b6;
+  --c-plum-950: #1c0b0e;
+  --c-plum-900: #2a1215;
+  --c-plum-800: #3d1a20;
+  --c-plum-600: #5e4340;
+  --c-plum-500: #7d6058;
+  --c-berry-700: #6e1328;
+  --c-berry-600: #8c1c34;
+  --c-berry-500: #a82a44;
+  --c-marigold-400: #f2a541;
+  --c-marigold-300: #f7c172;
+  --c-saffron-500: #e07a2a;
+  --c-leaf-600: #2f6b45;
+
+  /* semantic */
+  --bg: var(--c-cream-100);
+  --bg-raised: var(--c-cream-50);
+  --bg-sunk: var(--c-cream-200);
+  --bg-deep: var(--c-plum-900);
+  --fg: var(--c-plum-900);
+  --fg-2: var(--c-plum-600);
+  --fg-3: var(--c-plum-500);
+  --fg-on-deep: var(--c-cream-100);
+  --fg-on-deep-2: rgba(251, 243, 234, 0.74);
+  --line: rgba(42, 18, 21, 0.12);
+  --line-strong: rgba(42, 18, 21, 0.22);
+  --line-on-deep: rgba(251, 243, 234, 0.16);
+  --action: var(--c-berry-600);
+  --action-hover: var(--c-berry-700);
+  --action-fg: #fffaf4;
+  --spark: var(--c-marigold-400);
+  --success: var(--c-leaf-600);
+  --focus: var(--c-saffron-500);
+
+  /* shade accent — overridden per product page */
+  --accent: var(--c-berry-600);
+  --accent-tint: var(--c-blush-200);
+  --accent-glow: var(--c-berry-500);
+
+  /* type */
+  --font-display: "Zodiak", Georgia, serif;
+  --font-body: "General Sans", system-ui, sans-serif;
+  /* 1.25 modular scale, fluid at the top */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: clamp(1.6rem, 1.3rem + 1.1vw, 2rem);
+  --fs-2xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --fs-3xl: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --fs-display: clamp(3rem, 1.4rem + 6.6vw, 7.5rem);
+
+  /* space (8pt with half steps) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --section-y: clamp(4.5rem, 3rem + 6vw, 9rem);
+  --gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
+  --maxw: 1360px;
+
+  /* radius by role */
+  --r-chip: 999px;
+  --r-btn: 999px;
+  --r-input: 14px;
+  --r-card: 22px;
+  --r-media: 28px;
+  --r-arch: 999px 999px 28px 28px;
+
+  /* elevation — layered, warm-tinted */
+  --sh-1: 0 1px 1px rgba(42, 18, 21, 0.04), 0 2px 6px rgba(42, 18, 21, 0.05);
+  --sh-2: 0 1px 2px rgba(42, 18, 21, 0.05), 0 8px 18px -6px rgba(42, 18, 21, 0.12), 0 22px 40px -18px rgba(90, 22, 40, 0.18);
+  --sh-3: 0 2px 4px rgba(42, 18, 21, 0.06), 0 18px 40px -12px rgba(42, 18, 21, 0.22), 0 50px 90px -30px rgba(140, 28, 52, 0.28);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-micro: 0.22s;
+  --d-ui: 0.35s;
+  --d-reveal: 0.9s;
+
+  --header-h: 68px;
+  --announce-h: 36px;
+
+  color-scheme: light;
+}
+
+@include up($md) {
+  :root {
+    --header-h: 78px;
+  }
+}
+
+/* ============================== reset ============================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+@include reduced {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip; /* safety net only — layouts are built overflow-free */
+}
+
+/* Paper grain — keeps the cream from ever reading as a flat fill */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .38  0 0 0 0 .3  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+img,
+picture,
+video,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+::selection {
+  background: var(--c-marigold-300);
+  color: var(--c-plum-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ============================== layout ============================== */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.eyebrow {
+  @include eyebrow;
+  color: var(--fg-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 0.85em;
+  height: 0.85em;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--c-cream-300) 50%, var(--accent) 50%);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  flex: none;
+}
+
+.display-it {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 1000;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 10px 16px;
+  border-radius: var(--r-input);
+  transition: top var(--d-micro) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* placeholder marker for unconfirmed client assets */
+.ph-note {
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--fg-3);
+}
+
+main {
+  position: relative;
+  z-index: 2;
+}

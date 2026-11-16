@@ -1,0 +1,40 @@
+.price {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.2em 0.55em;
+}
+
+.now {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.mrp {
+  color: var(--fg-3);
+  text-decoration-thickness: 1px;
+}
+
+.save {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.sm {
+  font-size: var(--fs-sm);
+}
+
+.md {
+  font-size: var(--fs-base);
+}
+
+.lg {
+  font-size: var(--fs-lg);
+  .now {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.6em;
+    letter-spacing: -0.02em;
+  }
+}

@@ -1,0 +1,111 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  padding-block: clamp(4rem, 3rem + 6vw, 8rem);
+  background:
+    radial-gradient(45% 50% at 50% 30%, rgba(239, 196, 182, 0.6), transparent 70%),
+    radial-gradient(30% 40% at 10% 90%, rgba(242, 165, 65, 0.15), transparent 70%);
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.1rem;
+}
+
+.halves {
+  position: relative;
+  width: clamp(120px, 22vw, 180px);
+  aspect-ratio: 1;
+  margin-bottom: 1rem;
+  span {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.left {
+  left: 0;
+  border-radius: 999px 0 0 999px;
+  background: var(--c-cream-300);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  animation: drift-l 5s var(--ease-move) infinite alternate;
+}
+
+.right {
+  right: 0;
+  border-radius: 0 999px 999px 0;
+  background: radial-gradient(circle at 20% 40%, var(--c-berry-500), var(--c-berry-700));
+  animation: drift-r 5s var(--ease-move) infinite alternate;
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  max-width: 14ch;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.lede {
+  color: var(--fg-2);
+  max-width: 42ch;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 52px;
+  padding: 0 1.6rem;
+  border-radius: var(--r-btn);
+  background: var(--action);
+  color: var(--action-fg);
+  font-weight: 600;
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--action-hover);
+  }
+}
+
+.link {
+  font-weight: 600;
+  padding-bottom: 3px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat;
+  @include focus-ring(3px);
+  @include hover {
+    color: var(--action);
+  }
+}
+
+@keyframes drift-l {
+  to {
+    transform: translateX(-14px) rotate(-6deg);
+  }
+}
+
+@keyframes drift-r {
+  to {
+    transform: translateX(14px) rotate(6deg);
+  }
+}
+
+@include reduced {
+  .left,
+  .right {
+    animation: none;
+  }
+}

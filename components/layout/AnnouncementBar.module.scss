@@ -1,0 +1,57 @@
+@use "../../styles/mixins" as *;
+
+.bar {
+  position: relative;
+  z-index: 3;
+  height: var(--announce-h);
+  background: var(--c-berry-600);
+  color: var(--c-cream-100);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: ticker 48s linear infinite; // ticker loop: constant speed is intended
+}
+
+.group {
+  display: flex;
+  flex: none;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.4rem;
+  padding-right: 2.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.sep {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--c-cream-100) 50%, var(--c-marigold-400) 50%);
+}
+
+.bar:hover .track {
+  animation-play-state: paused;
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@include reduced {
+  .track {
+    animation: none;
+  }
+}

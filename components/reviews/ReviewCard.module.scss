@@ -1,0 +1,97 @@
+@use "../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-card);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-2);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  img {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+}
+
+.body {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.text {
+  font-size: 0.9rem;
+  color: var(--fg-2);
+  line-height: 1.55;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.who {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  color: var(--success);
+}
+
+.shade {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 28px;
+  padding: 0 0.7rem 0 0.3rem;
+  border-radius: var(--r-chip);
+  background: var(--c-cream-200);
+  font-weight: 500;
+  @include focus-ring(2px);
+  span {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--glow), var(--hex) 72%);
+  }
+  @include hover {
+    background: var(--c-cream-300);
+  }
+}
+
+.type {
+  color: var(--fg-3);
+}
+
+.compact {
+  .body {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,232 @@
+@use "../../../../styles/mixins" as *;
+
+.article {
+  padding-top: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--fg-2);
+  margin-bottom: 1.75rem;
+  @include focus-ring(3px);
+  @include hover {
+    color: var(--action);
+  }
+}
+
+.headGrid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  @include up($md) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 4rem;
+  }
+}
+
+.headCopy {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--fg-3);
+}
+
+.cat {
+  padding: 4px 10px;
+  border-radius: var(--r-chip);
+  background: var(--c-blush-200);
+  color: var(--action);
+  font-weight: 600;
+}
+
+.title {
+  font-size: clamp(2.2rem, 1.5rem + 2.8vw, 4rem);
+  line-height: 1.02;
+}
+
+.excerpt {
+  font-size: var(--fs-md);
+  color: var(--fg-2);
+  max-width: 50ch;
+}
+
+.cover {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
+  border-radius: 999px 999px var(--r-media) var(--r-media);
+  overflow: hidden;
+  box-shadow: var(--sh-3);
+  img {
+    object-fit: cover;
+  }
+  @include up($md) {
+    justify-self: end;
+  }
+}
+
+.bodyGrid {
+  display: grid;
+  gap: 3rem;
+  padding-top: clamp(2.5rem, 2rem + 3vw, 5rem);
+  @include up($lg) {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 5rem;
+  }
+}
+
+.body {
+  min-width: 0;
+  max-width: 68ch;
+}
+
+.block {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--line);
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+  p {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--fg-2);
+  }
+}
+
+.num {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--action);
+  flex: none;
+}
+
+.disclaimer {
+  margin-top: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: 16px;
+  background: var(--c-cream-200);
+  font-size: 0.85rem;
+  color: var(--fg-2);
+}
+
+.aside {
+  min-width: 0;
+}
+
+.shop {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: var(--r-card);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-2);
+  @include up($lg) {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+}
+
+.shopTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.shades {
+  list-style: none;
+  display: grid;
+  gap: 0.15rem;
+  a {
+    display: grid;
+    grid-template-columns: 26px 38px minmax(0, 1fr);
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 12px;
+    @include focus-ring(1px);
+    @include hover {
+      background: var(--c-cream-200);
+    }
+  }
+}
+
+.dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--glow), var(--hex) 72%);
+}
+
+.code {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.shopBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 48px;
+  border-radius: var(--r-btn);
+  background: var(--action);
+  color: var(--action-fg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--action-hover);
+  }
+}
+
+.related {
+  padding-top: clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.relatedTitle {
+  font-size: var(--fs-2xl);
+  margin-bottom: 2rem;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.relatedGrid {
+  display: grid;
+  gap: 2.5rem 1.75rem;
+  @include up($sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include up($lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

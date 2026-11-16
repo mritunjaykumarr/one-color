@@ -1,0 +1,36 @@
+@use "../../styles/mixins" as *;
+
+.w {
+  display: inline-block;
+}
+
+.go .w {
+  animation: dye 0.62s var(--ease-out) backwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+/* blink in marigold, flush to sindoor, settle to the element's own ink */
+@keyframes dye {
+  0% {
+    opacity: 0;
+    color: var(--c-marigold-400);
+    transform: translateY(0.12em);
+  }
+  30% {
+    opacity: 1;
+    color: var(--c-marigold-400);
+    transform: translateY(0);
+  }
+  62% {
+    color: var(--c-berry-500);
+  }
+  100% {
+    color: var(--c-berry-500);
+  }
+}
+
+@include reduced {
+  .go .w {
+    animation: none;
+  }
+}

@@ -1,0 +1,453 @@
+@use "../../styles/mixins" as *;
+
+.box {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--fg-3);
+  a {
+    @include focus-ring(2px);
+    @include hover {
+      color: var(--fg);
+    }
+  }
+}
+
+.titleBlock {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.code {
+  @include eyebrow;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2.6rem, 1.8rem + 3vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: var(--fg-2);
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  justify-self: start;
+  padding-bottom: 2px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size var(--d-ui) var(--ease-out);
+  @include focus-ring(3px);
+  @include hover {
+    background-size: 100% 1px;
+  }
+  strong {
+    color: var(--fg);
+  }
+}
+
+.newTag {
+  font-size: 0.85rem;
+  color: var(--fg-3);
+}
+
+/* price — premium Indian convention: price, struck MRP, saving, taxes */
+.price {
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+}
+
+.now {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.mrp {
+  font-size: 0.9rem;
+  color: var(--fg-3);
+}
+
+.off {
+  align-self: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
+  border-radius: var(--r-chip);
+  background: var(--c-marigold-400);
+  color: var(--c-plum-900);
+}
+
+.saveLine {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--fg-2);
+  strong {
+    color: var(--success);
+  }
+}
+
+.upi {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--fg-3);
+}
+
+.group {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.groupHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.label {
+  @include eyebrow;
+  color: var(--fg-3);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.sw {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  @include focus-ring(3px);
+  @include hover {
+    .dot {
+      transform: scale(1.06);
+    }
+  }
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--fg);
+}
+
+.dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(42, 18, 21, 0.12);
+  transition: transform var(--d-ui) var(--ease-out);
+}
+
+.swSoon .dot {
+  opacity: 0.55;
+  background-blend-mode: luminosity;
+}
+
+.swSoon::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 1.5px;
+  background: var(--fg-3);
+  transform: rotate(-45deg);
+  opacity: 0.6;
+}
+
+.compare {
+  justify-self: start;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  @include focus-ring(2px);
+}
+
+.kitShades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.kitShade {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 40px;
+  padding: 0 0.85rem 0 0.35rem;
+  border-radius: var(--r-chip);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 0.8rem;
+  font-weight: 600;
+  @include focus-ring(2px);
+}
+
+.kitOn {
+  box-shadow: inset 0 0 0 2px var(--fg);
+}
+
+.dotSm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.6rem;
+  @include up($sm) {
+    grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  height: 56px;
+  border-radius: var(--r-btn);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  button {
+    width: 44px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    @include focus-ring(-4px);
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+  span {
+    min-width: 22px;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.add,
+.buy {
+  height: 56px;
+  border-radius: var(--r-btn);
+  font-weight: 600;
+  font-size: 0.95rem;
+  @include focus-ring(3px);
+}
+
+.add {
+  background: var(--action);
+  color: var(--action-fg);
+  overflow: hidden;
+  box-shadow: 0 14px 30px -14px rgba(140, 28, 52, 0.75);
+  transition: background-color var(--d-micro) var(--ease-out);
+  @include hover {
+    background: var(--action-hover);
+  }
+}
+
+.roll {
+  display: grid;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.25, 1);
+  span {
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+}
+
+.rolled {
+  transform: translateY(-56px);
+}
+
+.buy {
+  grid-column: 1 / -1;
+  box-shadow: inset 0 0 0 1.5px var(--fg);
+  transition: background-color var(--d-micro) var(--ease-out), color var(--d-micro) var(--ease-out);
+  @include hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  @include up($sm) {
+    grid-column: auto;
+  }
+}
+
+.box2 {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.2rem 1.25rem;
+  border-radius: var(--r-card);
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--accent-tint) 90%, transparent), transparent 70%),
+    var(--bg-raised);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.inBox {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--fg-2);
+  li {
+    position: relative;
+    padding-left: 1.1rem;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, var(--c-cream-300) 50%, var(--accent) 50%);
+    }
+  }
+}
+
+.benefits {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+  li {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    color: var(--fg-2);
+  }
+  svg {
+    color: var(--accent);
+  }
+}
+
+.delivery {
+  display: grid;
+  gap: 1rem;
+}
+
+.trust {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem 1rem;
+  font-size: 0.8rem;
+  color: var(--fg-2);
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  svg {
+    font-size: 1.15rem;
+    color: var(--fg);
+    flex: none;
+  }
+}
+
+/* notify */
+.notify {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border-radius: var(--r-card);
+  background: var(--c-plum-900);
+  color: var(--c-cream-100);
+}
+
+.notifyTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+
+.hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.notifyRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.4rem;
+  input {
+    height: 50px;
+    padding: 0 1.1rem;
+    border: 0;
+    border-radius: var(--r-btn);
+    background: rgba(251, 243, 234, 0.1);
+    color: var(--c-cream-50);
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--line-on-deep);
+    &:focus {
+      box-shadow: inset 0 0 0 1.5px var(--c-marigold-400);
+    }
+  }
+  button {
+    height: 50px;
+    padding: 0 1.25rem;
+    border-radius: var(--r-btn);
+    background: var(--c-marigold-400);
+    color: var(--c-plum-900);
+    font-weight: 600;
+    font-size: 0.875rem;
+    @include focus-ring(3px);
+  }
+}
+
+.notifyMsg {
+  font-size: 0.8rem;
+  color: var(--fg-on-deep-2);
+}
+
+.err {
+  color: #ffb4a8;
+}

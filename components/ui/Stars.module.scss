@@ -1,0 +1,22 @@
+.stars {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  font-family: system-ui, sans-serif;
+  flex: none;
+}
+
+.track {
+  color: var(--line-strong);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  width: var(--pct);
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--c-marigold-400);
+}

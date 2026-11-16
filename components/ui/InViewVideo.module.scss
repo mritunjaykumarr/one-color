@@ -1,0 +1,32 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--c-plum-800);
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 250, 244, 0.9);
+  color: var(--c-plum-900);
+  backdrop-filter: blur(6px);
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--c-marigold-300);
+  }
+}

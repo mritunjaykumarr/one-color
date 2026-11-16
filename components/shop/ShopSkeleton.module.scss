@@ -1,0 +1,56 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  padding-top: 3rem;
+  padding-bottom: 6rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.title,
+.search,
+.card {
+  border-radius: var(--r-card);
+  background: linear-gradient(90deg, var(--c-cream-200), var(--c-cream-300), var(--c-cream-200));
+  background-size: 200% 100%;
+  animation: shimmer 1.6s var(--ease-move) infinite;
+}
+
+.title {
+  width: 40%;
+  height: 56px;
+}
+
+.search {
+  max-width: 640px;
+  height: 56px;
+  border-radius: var(--r-btn);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  @include up($md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  aspect-ratio: 4 / 5;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@include reduced {
+  .title,
+  .search,
+  .card {
+    animation: none;
+  }
+}

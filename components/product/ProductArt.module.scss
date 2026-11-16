@@ -1,0 +1,67 @@
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.single {
+  width: 100%;
+}
+
+.group {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+
+.member {
+  flex: 0 0 auto;
+  width: 70%;
+}
+
+.duo .member {
+  width: 60%;
+  &:first-child {
+    margin-right: -18%;
+    transform: translateY(-6%);
+  }
+}
+
+.trio .member {
+  width: 50%;
+  &:nth-child(1) {
+    margin-right: -16%;
+    transform: scale(0.88) translateY(-4%);
+  }
+  &:nth-child(2) {
+    position: relative;
+    z-index: 2;
+  }
+  &:nth-child(3) {
+    margin-left: -16%;
+    transform: scale(0.88) translateY(-4%);
+  }
+}
+
+.kit .member {
+  width: 62%;
+  position: relative;
+  z-index: 2;
+}
+
+.kitTube,
+.kitTall {
+  position: absolute;
+  bottom: 0;
+  width: 36%;
+}
+
+.kitTube {
+  left: 0;
+}
+
+.kitTall {
+  right: 0;
+}

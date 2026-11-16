@@ -1,0 +1,90 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  isolation: isolate;
+  background: var(--c-cream-300);
+  &:focus-within .handle {
+    box-shadow: 0 0 0 3px var(--focus), var(--sh-2);
+  }
+}
+
+.img {
+  object-fit: cover;
+  object-position: 50% 25%;
+  pointer-events: none;
+}
+
+.beforeLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.tag {
+  position: absolute;
+  top: 1rem;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: var(--r-chip);
+  background: rgba(28, 11, 14, 0.62);
+  backdrop-filter: blur(6px);
+  color: var(--c-cream-50);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.tagL {
+  left: 1rem;
+}
+
+.tagR {
+  right: 1rem;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--c-cream-50);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--c-cream-50);
+  color: var(--c-plum-900);
+  box-shadow: var(--sh-2);
+  font-size: 0.95rem;
+}
+
+.range {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none; // pointer handled by the wrapper; the input owns keyboard + a11y
+}

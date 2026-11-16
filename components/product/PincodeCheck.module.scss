@@ -1,0 +1,73 @@
+@use "../../styles/mixins" as *;
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 52px;
+  padding: 0 0.35rem 0 0.95rem;
+  border-radius: var(--r-input);
+  background: var(--bg-raised);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  &:focus-within {
+    box-shadow: inset 0 0 0 1.5px var(--fg);
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    outline: none;
+    height: 100%;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  button {
+    height: 42px;
+    padding: 0 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--action);
+    @include focus-ring(2px);
+    @include hover {
+      background: var(--c-cream-200);
+    }
+  }
+}
+
+.pinIcon {
+  font-size: 1.2rem;
+  color: var(--fg-2);
+  flex: none;
+}
+
+.result {
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--fg-2);
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  svg {
+    color: var(--success);
+    flex: none;
+  }
+  strong {
+    color: var(--fg);
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--action);
+}

@@ -1,0 +1,234 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+  width: 100%;
+}
+
+.stage {
+  position: relative;
+  width: min(100%, 480px);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 0;
+}
+
+.ring {
+  position: absolute;
+  inset: 4% 0;
+  margin: auto;
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: radial-gradient(circle, rgba(239, 196, 182, 0.4), transparent 65%);
+}
+
+.bottle {
+  position: relative;
+  width: 100%;
+}
+
+.spot {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  transition: opacity var(--d-ui) var(--ease-out);
+}
+
+.dim .pin {
+  opacity: 0.55;
+}
+
+.pin {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 250, 244, 0.95);
+  color: var(--c-plum-900);
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(42, 18, 21, 0.15), var(--sh-2);
+  transition: transform var(--d-micro) var(--ease-out), background-color var(--d-micro) var(--ease-out);
+  @include focus-ring(3px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-marigold-400);
+    animation: ping 2.2s var(--ease-out) infinite;
+  }
+}
+
+.on .pin {
+  background: var(--c-plum-900);
+  color: var(--c-cream-100);
+  transform: scale(1.12);
+}
+
+.tip {
+  position: absolute;
+  top: 50%;
+  width: 220px;
+  padding: 0.8rem 0.95rem;
+  border-radius: 16px;
+  background: var(--c-cream-50);
+  box-shadow: var(--sh-3);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--fg-2);
+  display: none;
+  pointer-events: none;
+  strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: var(--fg);
+    margin-bottom: 0.2rem;
+  }
+  @include up($lg) {
+    display: block;
+    clip-path: inset(0 100% 0 0 round 16px);
+    transition: clip-path 0.45s var(--ease-move);
+  }
+}
+
+.right {
+  left: calc(100% + 14px);
+  transform: translateY(-50%);
+}
+
+.left {
+  right: calc(100% + 14px);
+  transform: translateY(-50%);
+  @include up($lg) {
+    clip-path: inset(0 0 0 100% round 16px);
+  }
+}
+
+.on .tip {
+  @include up($lg) {
+    clip-path: inset(0 0 0 0 round 16px);
+  }
+}
+
+.controls {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.clickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 52px;
+  padding: 0 1.5rem 0 1.1rem;
+  border-radius: var(--r-btn);
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+  transition: background-color var(--d-micro) var(--ease-out);
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--action);
+  }
+}
+
+.clickOn {
+  background: var(--action);
+}
+
+.clickDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--c-cream-100) 50%, var(--c-marigold-400) 50%);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.clickOn .clickDot {
+  transform: rotate(180deg);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--fg-3);
+}
+
+.legend {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  gap: 0.4rem;
+  @include up($lg) {
+    display: none;
+  }
+  button {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    text-align: left;
+    padding: 0.75rem 0.85rem;
+    border-radius: 16px;
+    background: var(--bg-raised);
+    box-shadow: inset 0 0 0 1px var(--line);
+    @include focus-ring(2px);
+  }
+  strong {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+.legendOn button {
+  box-shadow: inset 0 0 0 1.5px var(--fg);
+}
+
+.legendBody {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--fg-2);
+  margin-top: 0.15rem;
+}
+
+.num {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-plum-900);
+  color: var(--c-cream-100);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@include reduced {
+  .pin::before {
+    animation: none;
+    opacity: 0.6;
+  }
+}

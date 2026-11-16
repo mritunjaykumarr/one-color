@@ -1,0 +1,238 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  padding-top: var(--section-y);
+}
+
+.intro {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 3rem);
+  @include up($md) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: end;
+    column-gap: 3rem;
+    > :first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.lede {
+  color: var(--fg-2);
+  max-width: 44ch;
+  a {
+    color: var(--fg);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.stack {
+  position: relative;
+}
+
+/* every slide is sticky inside one container: each new card rises over the previous one */
+.slide {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+}
+
+.persp {
+  height: 100%;
+  perspective: 250vw;
+  padding: calc(var(--header-h) + 0.75rem) clamp(0.5rem, 1vw, 1rem) clamp(0.5rem, 1vw, 1rem);
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.4rem, 1rem + 2vw, 3rem);
+  border-radius: clamp(24px, 3vw, 44px);
+  color: var(--c-plum-900);
+  overflow: hidden;
+  transform-origin: 50% 0%;
+  will-change: transform, opacity;
+  box-shadow: var(--sh-2);
+}
+
+.g1 {
+  background: linear-gradient(180deg, #fbefe3 0%, #f6dccf 52%, #f2c9bd 100%);
+}
+
+.g2 {
+  background: linear-gradient(180deg, #f8e3d2 0%, #f3cfbb 50%, #f0b98f 100%);
+}
+
+.g3 {
+  background: linear-gradient(180deg, #f9e6c9 0%, #f5d29c 50%, #f2b765 100%);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.h {
+  font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  em {
+    font-weight: 300;
+    color: var(--c-berry-600);
+  }
+}
+
+.num {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 1.8rem + 6vw, 8.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: rgba(42, 18, 21, 0.85);
+}
+
+.time {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42, 18, 21, 0.62);
+}
+
+.info {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(1rem, 0.5rem + 1.5vw, 2.25rem);
+  @include up($md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: clamp(1.05rem, 0.9rem + 0.5vw, 1.4rem);
+  font-weight: 500;
+  &::before {
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--c-cream-50) 50%, var(--c-berry-600) 50%);
+    flex: none;
+  }
+}
+
+.p {
+  margin: 0.3rem 0 0 1.45rem;
+  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1.1rem);
+  line-height: 1.45;
+  color: rgba(42, 18, 21, 0.72);
+}
+
+.row {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 0.5rem;
+  height: min(46vh, 30rem);
+  @include up($md) {
+    display: flex;
+    gap: 1rem;
+    height: min(27rem, 37vh);
+  }
+}
+
+.pc {
+  position: relative;
+  min-width: 0;
+  border-radius: clamp(14px, 1.6vw, 24px);
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem rgba(42, 18, 21, 0.12);
+  background: rgba(255, 250, 244, 0.4);
+  img {
+    object-fit: cover;
+  }
+  @include up($md) {
+    flex: 1;
+  }
+}
+
+.wide {
+  grid-column: 1 / -1;
+  @include up($md) {
+    flex: 1.95;
+  }
+}
+
+.chip {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--r-chip);
+  background: rgba(255, 250, 244, 0.88);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.cap {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.6rem;
+  padding: 0 1rem;
+  border-radius: 14px;
+  background: rgba(42, 18, 21, 0.34);
+  backdrop-filter: blur(10px);
+  color: #fffaf4;
+  font-size: 0.8rem;
+  font-weight: 500;
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* the video card carries its own pause button; keep the caption clear of it */
+.wide :global(video) ~ button {
+  bottom: 4rem;
+}
+
+.ph {
+  margin-top: 1rem;
+}
+
+@include reduced {
+  .slide {
+    position: relative;
+  }
+}

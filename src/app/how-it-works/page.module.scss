@@ -1,0 +1,247 @@
+@use "../../../styles/mixins" as *;
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 16px;
+    background: var(--bg-raised);
+    box-shadow: var(--sh-1);
+    font-size: 0.85rem;
+    color: var(--fg-2);
+  }
+  strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--fg);
+  }
+}
+
+.h2 {
+  font-size: var(--fs-2xl);
+  margin: 0.85rem 0 1rem;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.lede {
+  color: var(--fg-2);
+  font-size: var(--fs-md);
+  max-width: 48ch;
+}
+
+/* open & use */
+.openGrid {
+  display: grid;
+  gap: 2.5rem;
+  @include up($md) {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: 4.5rem;
+    align-items: center;
+  }
+}
+
+.openMedia {
+  display: grid;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+}
+
+.arch {
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px var(--r-media) var(--r-media);
+  overflow: hidden;
+  box-shadow: var(--sh-3);
+}
+
+.openSteps {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  @include up($sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.openStep {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.25rem;
+  border-radius: var(--r-card);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-2);
+  h3 {
+    font-size: 1.35rem;
+  }
+  p {
+    font-size: 0.9rem;
+    color: var(--fg-2);
+    margin-top: 0.3rem;
+  }
+}
+
+.openIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--c-blush-200);
+  color: var(--action);
+  font-size: 1.35rem;
+}
+
+.openN {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--fg-3);
+  vertical-align: middle;
+}
+
+/* storage */
+.store {
+  background: linear-gradient(180deg, transparent, var(--c-cream-200) 25%, var(--c-cream-200) 75%, transparent);
+}
+
+.storeHead {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  @include up($md) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: end;
+  }
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 1.75rem 0 2.5rem;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 12.5%;
+    right: 12.5%;
+    top: calc(1.75rem + 22px);
+    height: 1.5px;
+    background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px);
+  }
+}
+
+.tick {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.35rem;
+}
+
+.tickDot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg, var(--c-berry-600) var(--fill), transparent var(--fill)),
+    var(--c-cream-50);
+  box-shadow: 0 0 0 4px var(--c-cream-200), 0 0 0 5px var(--line-strong);
+}
+
+.tickLabel {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.tickNote {
+  font-size: 0.75rem;
+  color: var(--fg-3);
+}
+
+.storeCards {
+  display: grid;
+  gap: 1rem;
+  @include up($md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.storeCard {
+  padding: 1.5rem;
+  border-radius: var(--r-card);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-1);
+  svg {
+    font-size: 1.75rem;
+    color: var(--action);
+    margin-bottom: 0.9rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.35rem;
+  }
+  p {
+    color: var(--fg-2);
+    font-size: 0.925rem;
+  }
+}
+
+.claim {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--fg-3);
+}
+
+/* cta */
+.cta {
+  padding-block: var(--section-y);
+}
+
+.ctaInner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.ctaTitle {
+  font-size: var(--fs-3xl);
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 56px;
+  padding: 0 1.9rem;
+  border-radius: var(--r-btn);
+  background: var(--action);
+  color: var(--action-fg);
+  font-weight: 600;
+  box-shadow: 0 14px 30px -14px rgba(140, 28, 52, 0.8);
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--action-hover);
+  }
+}

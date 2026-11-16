@@ -1,0 +1,152 @@
+@use "../../styles/mixins" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(28, 11, 14, 0.4);
+}
+
+.panel {
+  background: var(--c-cream-50);
+  padding: 1rem 0 1.75rem;
+  box-shadow: var(--sh-3);
+  border-radius: 0 0 var(--r-media) var(--r-media);
+  max-height: 88dvh;
+  overflow-y: auto;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1.5px solid var(--fg);
+  padding: 0.5rem 0;
+}
+
+.lens {
+  font-size: 1.5rem;
+  flex: none;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+  padding: 0.35rem 0;
+  outline: none;
+  &::placeholder {
+    color: var(--fg-3);
+    opacity: 0.7;
+  }
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+.close {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  @include focus-ring(2px);
+  @include hover {
+    background: rgba(42, 18, 21, 0.06);
+  }
+}
+
+.head {
+  @include eyebrow;
+  color: var(--fg-3);
+  margin: 1.4rem 0 0.8rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  height: 38px;
+  padding: 0 1rem;
+  border-radius: var(--r-chip);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 0.875rem;
+  transition: background-color var(--d-micro) var(--ease-out);
+  @include focus-ring(2px);
+  @include hover {
+    background: var(--c-cream-200);
+  }
+}
+
+.list {
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+  @include up($md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem 1.5rem;
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.55rem;
+  margin: 0 -0.55rem;
+  border-radius: 16px;
+  transition: background-color var(--d-micro) var(--ease-out);
+  @include focus-ring(0px);
+  @include hover {
+    background: var(--c-cream-200);
+    .go {
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+.thumb {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.itemText {
+  display: grid;
+  min-width: 0;
+}
+
+.itemName {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.itemMeta {
+  font-size: 0.8rem;
+  color: var(--fg-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.go {
+  transition: transform var(--d-micro) var(--ease-out);
+}
+
+.all {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  @include focus-ring(2px);
+}

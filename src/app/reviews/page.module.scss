@@ -1,0 +1,152 @@
+@use "../../../styles/mixins" as *;
+
+.summary {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  border-radius: var(--r-media);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-3);
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.big {
+  font-family: var(--font-display);
+  font-size: clamp(3.75rem, 3rem + 3vw, 5.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+.scoreMeta {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--fg-2);
+}
+
+.dist {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 40px;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+.distLabel {
+  font-weight: 600;
+  color: var(--fg-2);
+}
+
+.distBar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--c-cream-200);
+  overflow: hidden;
+  span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-marigold-400), var(--c-berry-600));
+    transform-origin: left;
+  }
+}
+
+.distPct {
+  text-align: right;
+  color: var(--fg-3);
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    height: 32px;
+    padding: 0 0.5rem 0 0.8rem;
+    border-radius: var(--r-chip);
+    background: var(--c-cream-200);
+    font-size: 0.78rem;
+    font-weight: 500;
+    span {
+      padding: 2px 6px;
+      border-radius: var(--r-chip);
+      background: var(--c-cream-50);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--fg-2);
+    }
+  }
+}
+
+.head {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.h2 {
+  font-size: var(--fs-2xl);
+  margin-top: 0.5rem;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.reviews {
+  padding-top: clamp(1rem, 2vw, 2rem);
+}
+
+.results {
+  background: linear-gradient(180deg, transparent, var(--c-cream-200) 20%, var(--c-cream-200) 80%, transparent);
+  padding-bottom: calc(var(--section-y) + 2rem);
+}
+
+.cta {
+  padding-block: var(--section-y);
+}
+
+.ctaInner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.ctaTitle {
+  font-size: var(--fs-3xl);
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 56px;
+  padding: 0 1.9rem;
+  border-radius: var(--r-btn);
+  background: var(--action);
+  color: var(--action-fg);
+  font-weight: 600;
+  box-shadow: 0 14px 30px -14px rgba(140, 28, 52, 0.8);
+  @include focus-ring(3px);
+  @include hover {
+    background: var(--action-hover);
+  }
+}

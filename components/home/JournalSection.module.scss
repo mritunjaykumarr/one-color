@@ -1,0 +1,53 @@
+@use "../../styles/mixins" as *;
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.25rem 2rem;
+  margin-bottom: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  margin-top: 0.85rem;
+  max-width: 20ch;
+  em {
+    font-weight: 300;
+    color: var(--action);
+  }
+}
+
+.all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  padding-bottom: 3px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat;
+  @include focus-ring(3px);
+  @include hover {
+    color: var(--action);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  @include up($md) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+}
+
+.lead,
+.stack {
+  min-width: 0;
+}
+
+.stack {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}

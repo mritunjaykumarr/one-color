@@ -1,0 +1,112 @@
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.tools {
+  display: grid;
+  gap: 1rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 58px;
+  padding: 0 0.6rem 0 1.25rem;
+  border-radius: var(--r-btn);
+  background: var(--bg-raised);
+  box-shadow: var(--sh-1), inset 0 0 0 1px var(--line-strong);
+  > svg {
+    font-size: 1.25rem;
+    color: var(--fg-3);
+    flex: none;
+  }
+  &:focus-within {
+    box-shadow: var(--sh-1), inset 0 0 0 1.5px var(--fg);
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+  button {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    @include focus-ring(2px);
+    @include hover {
+      background: var(--c-cream-200);
+    }
+  }
+}
+
+.jump {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  a {
+    flex: none;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.95rem;
+    border-radius: var(--r-chip);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    @include focus-ring(2px);
+    @include hover {
+      background: var(--c-cream-200);
+    }
+  }
+}
+
+.count {
+  font-size: 0.85rem;
+  color: var(--fg-3);
+}
+
+.groups {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.group {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+.h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: 0.75rem;
+}
+
+.empty {
+  padding: 2rem;
+  border-radius: var(--r-card);
+  background: var(--c-cream-200);
+  color: var(--fg-2);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+}

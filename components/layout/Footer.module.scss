@@ -1,0 +1,207 @@
+@use "../../styles/mixins" as *;
+
+.footer {
+  --accent: var(--c-marigold-400);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--c-plum-900);
+  color: var(--fg-on-deep);
+  padding-top: clamp(4rem, 3rem + 4vw, 7rem);
+  border-radius: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px) 0 0;
+  margin-top: clamp(2rem, 4vw, 4rem);
+}
+
+.glow {
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(circle, rgba(140, 28, 52, 0.55), transparent 62%);
+  pointer-events: none;
+}
+
+.top {
+  position: relative;
+  display: grid;
+  gap: 3rem;
+  @include up($lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 4rem;
+  }
+}
+
+.lead {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.statement {
+  font-size: var(--fs-3xl);
+  line-height: 0.98;
+  em {
+    font-weight: 300;
+    color: var(--c-marigold-300);
+  }
+}
+
+.sub {
+  color: var(--fg-on-deep-2);
+  max-width: 40ch;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+  @include up($md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.col {
+  min-width: 0;
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+  a {
+    color: var(--fg-on-deep-2);
+    font-size: 0.925rem;
+    transition: color var(--d-micro) var(--ease-out);
+    @include focus-ring(2px);
+    @include hover {
+      color: var(--c-marigold-300);
+    }
+  }
+}
+
+.colTitle {
+  @include eyebrow;
+  color: var(--fg-on-deep);
+  margin-bottom: 1rem;
+}
+
+.shadeRow {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line-on-deep);
+}
+
+.shade {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  height: 40px;
+  padding: 0 1rem 0 0.4rem;
+  border-radius: var(--r-chip);
+  background: rgba(251, 243, 234, 0.06);
+  font-size: 0.85rem;
+  transition: background-color var(--d-micro) var(--ease-out);
+  @include focus-ring(2px);
+  @include hover {
+    background: rgba(251, 243, 234, 0.14);
+  }
+}
+
+.shadeDot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--glow), var(--hex) 72%);
+  box-shadow: 0 0 0 1px rgba(251, 243, 234, 0.3);
+}
+
+.mid {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  font-size: 0.9rem;
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    @include focus-ring(2px);
+    @include hover {
+      color: var(--c-marigold-300);
+    }
+  }
+}
+
+.hours {
+  color: var(--fg-on-deep-2);
+}
+
+.social {
+  display: flex;
+  gap: 0.5rem;
+  a {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    box-shadow: inset 0 0 0 1px var(--line-on-deep);
+    transition: background-color var(--d-micro) var(--ease-out), color var(--d-micro) var(--ease-out);
+    @include focus-ring(2px);
+    @include hover {
+      background: var(--c-marigold-400);
+      color: var(--c-plum-900);
+    }
+  }
+}
+
+.giant {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(4rem, 19vw, 18rem);
+  line-height: 0.8;
+  opacity: 0.95;
+  margin-bottom: -0.08em;
+  padding-inline: var(--gutter);
+  > span {
+    font-size: inherit;
+  }
+}
+
+.legal {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line-on-deep);
+  font-size: 0.8rem;
+  color: var(--fg-on-deep-2);
+}
+
+.ph {
+  width: 100%;
+  font-size: 0.75rem;
+  @include up($md) {
+    width: auto;
+  }
+}
