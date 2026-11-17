@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
     title,
     description: `${p.tagline} ${p.description}`.slice(0, 158),
     alternates: { canonical: `/products/${p.slug}` },
-    openGraph: { type: "website", title: `${title} | OneColor`, description: p.tagline, images: [{ url: `${img}?w=1200&q=75` }] },
+    openGraph: { type: "website", title: `${title} | OneColor`, description: p.tagline, images: [{ url: img.startsWith("http") ? `${img}?w=1200&q=75` : `${SITE.url}${img}` }] },
   };
 }
 
@@ -66,7 +66,9 @@ export default async function ProductPage({ params }) {
     description: p.description,
     brand: { "@type": "Brand", name: "OneColor" },
     sku: p.slug,
-    image: isShade ? [imgs.portrait.src] : [IMG.combing.src],
+    image: isShade
+      ? [imgs.portrait.src.startsWith("http") ? imgs.portrait.src : `${SITE.url}${imgs.portrait.src}`]
+      : [IMG.combing.src.startsWith("http") ? IMG.combing.src : `${SITE.url}${IMG.combing.src}`],
     ...(p.reviews ? { aggregateRating: { "@type": "AggregateRating", ratingValue: p.rating, reviewCount: p.reviews } } : {}),
     offers: {
       "@type": "Offer",

@@ -24,7 +24,13 @@ export async function generateMetadata({ params }) {
     title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: { type: "article", title: post.title, description: post.excerpt, publishedTime: post.date, images: [{ url: `${post.cover.src}?w=1200&q=75` }] },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      publishedTime: post.date,
+      images: [{ url: post.cover.src.startsWith("http") ? `${post.cover.src}?w=1200&q=75` : `${SITE.url}${post.cover.src}` }],
+    },
   };
 }
 
@@ -43,7 +49,7 @@ export default async function ArticlePage({ params }) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    image: `${post.cover.src}?w=1200&q=75`,
+    image: post.cover.src.startsWith("http") ? `${post.cover.src}?w=1200&q=75` : `${SITE.url}${post.cover.src}`,
     author: { "@type": "Organization", name: "OneColor" },
     publisher: { "@type": "Organization", name: "OneColor", url: SITE.url },
     mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,

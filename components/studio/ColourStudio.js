@@ -20,23 +20,53 @@ import { loadImage, buildMask, greysPlate, shadePlate } from "../../lib/hairTint
 import styles from "./ColourStudio.module.scss";
 import FlashText from "../ui/FlashText";
 
-const SOURCE = {
-  src: "https://images.pexels.com/photos/30703874/pexels-photo-30703874.jpeg",
-  alt: "Woman with long, straight dark hair falling past her waist, looking down",
-  // hair region in fractions of the photo (hand-authored), face excluded
-  polygon: [
-    [0.35, 0.15], [0.47, 0.11], [0.62, 0.115], [0.75, 0.16], [0.81, 0.32], [0.86, 0.5],
-    [0.9, 0.66], [0.96, 0.86], [1, 1], [0.2, 1], [0.23, 0.86], [0.29, 0.7],
-    [0.36, 0.6], [0.36, 0.46], [0.35, 0.3],
-  ],
-  exclude: [{ cx: 0.5, cy: 0.34, rx: 0.088, ry: 0.142 }],
-  focus: { x: 0.58, y: 0.42 }, // where the idle sweep orbits
+const STUDIO_SOURCES = {
+  "burgundy-wine": {
+    src: "/assets/model-7.jpg",
+    alt: "Model with lustrous burgundy-wine hair and plum tones",
+    polygon: [
+      [0.25, 0.08], [0.55, 0.08], [0.75, 0.14], [0.88, 0.35], [0.92, 0.65],
+      [0.85, 0.95], [0.65, 1], [0.15, 1], [0.08, 0.75], [0.06, 0.45], [0.15, 0.22]
+    ],
+    exclude: [{ cx: 0.48, cy: 0.36, rx: 0.12, ry: 0.15 }],
+    focus: { x: 0.52, y: 0.42 },
+  },
+  "natural-black": {
+    src: "/assets/model-3.jpg",
+    alt: "Model with glossy high ponytail and natural-black hair",
+    polygon: [[0.2, 0.04], [0.8, 0.04], [0.88, 0.35], [0.82, 0.75], [0.18, 0.75], [0.12, 0.35]],
+    exclude: [{ cx: 0.5, cy: 0.33, rx: 0.14, ry: 0.17 }],
+    focus: { x: 0.5, y: 0.35 },
+  },
+  "espresso-dark-brown": {
+    src: "/assets/model-6.jpg",
+    alt: "Model with deep espresso wavy bob hair",
+    polygon: [[0.15, 0.08], [0.85, 0.08], [0.92, 0.42], [0.8, 0.65], [0.2, 0.65], [0.08, 0.42]],
+    exclude: [{ cx: 0.5, cy: 0.34, rx: 0.14, ry: 0.17 }],
+    focus: { x: 0.5, y: 0.32 },
+  },
+  "chestnut-brown": {
+    src: "/assets/model-1.jpg",
+    alt: "Model with luminous wavy chestnut-brown hair",
+    polygon: [[0.15, 0.05], [0.85, 0.05], [0.92, 0.35], [0.9, 0.85], [0.1, 0.85], [0.08, 0.35]],
+    exclude: [{ cx: 0.54, cy: 0.28, rx: 0.12, ry: 0.16 }],
+    focus: { x: 0.48, y: 0.35 },
+  },
+  "mahogany": {
+    src: "/assets/model-9.jpg",
+    alt: "Model with warm mahogany-copper hair in sunset light",
+    polygon: [[0.18, 0.08], [0.82, 0.08], [0.92, 0.45], [0.88, 0.85], [0.12, 0.85], [0.08, 0.45]],
+    exclude: [{ cx: 0.5, cy: 0.4, rx: 0.14, ry: 0.18 }],
+    focus: { x: 0.5, y: 0.36 },
+  },
 };
 
+const DEFAULT_SOURCE = STUDIO_SOURCES["burgundy-wine"];
+
 const HOTSPOTS = [
-  { id: "roots", x: 0.56, y: 0.15, title: "Roots", body: "Full grey coverage at the parting, where greys show first." },
-  { id: "lengths", x: 0.66, y: 0.5, title: "Lengths", body: "Even colour from root to tip, with no dark bands or patchy overlaps." },
-  { id: "ends", x: 0.8, y: 0.84, title: "Ends", body: "Shine sealed in by the colour-lock conditioner in every box." },
+  { id: "roots", x: 0.52, y: 0.16, title: "Roots", body: "Full grey coverage at the parting, where greys show first." },
+  { id: "lengths", x: 0.68, y: 0.48, title: "Lengths", body: "Even colour from root to tip, with no dark bands or patchy overlaps." },
+  { id: "ends", x: 0.76, y: 0.8, title: "Ends", body: "Shine sealed in by the colour-lock conditioner in every box." },
 ];
 
 const DETAILS = (s) => [
@@ -61,48 +91,18 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
   const [added, setAdded] = useState(false);
   const [tip, setTip] = useState(null);
   const shade = shades[idx];
+  const source = STUDIO_SOURCES[shade?.slug] || DEFAULT_SOURCE;
 
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
   const buyRef = useRef(null);
   const sectionRef = useRef(null);
   const st = useRef({
-    mask: null, before: null, plates: {}, after: null, off: null,
+    cache: {}, mask: null, before: null, plates: {}, after: null, off: null,
     mouse: { x: 0, y: 0 }, smooth: { x: 0, y: 0 }, radius: 0, radiusTarget: 0,
     lastMove: 0, t0: 0, visible: false, raf: 0, dpr: 1, w: 0, h: 0,
   });
   const [geom, setGeom] = useState({ ox: 0, oy: 0, sw: 0, sh: 0, W: 0, H: 0 });
-
-  /* —— build plates once —— */
-  useEffect(() => {
-    let alive = true;
-    (async () => {
-      try {
-        const url = `/_next/image?url=${encodeURIComponent(SOURCE.src)}&w=1080&q=75`;
-        const img = await loadImage(url);
-        if (!alive) return;
-        const mask = buildMask(img, SOURCE);
-        st.current.mask = mask;
-        st.current.before = greysPlate(mask);
-        setReady(true);
-      } catch {
-        /* image failed — the static fallback photo stays visible */
-      }
-    })();
-    return () => {
-      alive = false;
-    };
-  }, []);
-
-  /* —— (re)build the shade plate when the shade changes —— */
-  useEffect(() => {
-    const s = st.current;
-    if (!ready || !s.mask) return;
-    if (!s.plates[shade.slug]) s.plates[shade.slug] = shadePlate(s.mask, shade.hex, shade.glow);
-    s.after = s.plates[shade.slug];
-    // a shade change "re-pours" the colour: spotlight blooms from small
-    s.radius = Math.min(s.radius, 40);
-  }, [ready, shade]);
 
   /* —— geometry: cover-fit the plate into the stage —— */
   const measure = useCallback(() => {
@@ -122,18 +122,61 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
     const sw = s.mask.w * scale;
     const sh = s.mask.h * scale;
     const ox = (W - sw) / 2;
-    const oy = (H - sh) * 0.35; // keep the head in frame on wide stages
+    const oy = (H - sh) * 0.22; // keep the head in frame
     setGeom({ ox, oy, sw, sh, W, H });
     s.geom = { ox, oy, sw, sh };
     s.radiusTarget = Math.round(Math.min(420, Math.max(110, W * 0.32)));
     if (!s.t0) {
-      s.mouse = { x: ox + SOURCE.focus.x * sw, y: oy + SOURCE.focus.y * sh };
+      s.mouse = { x: ox + source.focus.x * sw, y: oy + source.focus.y * sh };
       s.smooth = { ...s.mouse };
     }
     if (!s.off) s.off = document.createElement("canvas");
     s.off.width = cv.width;
     s.off.height = cv.height;
-  }, []);
+  }, [source]);
+
+  /* —— build plates for active shade model —— */
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      const s = st.current;
+      const slug = shade.slug;
+      if (!s.cache) s.cache = {};
+      if (s.cache[slug]) {
+        s.mask = s.cache[slug].mask;
+        s.before = s.cache[slug].before;
+        s.after = s.cache[slug].after;
+        s.radius = Math.min(s.radius, 40);
+        setReady(true);
+        measure();
+        return;
+      }
+      try {
+        let img;
+        try {
+          img = await loadImage(`/_next/image?url=${encodeURIComponent(source.src)}&w=1080&q=75`);
+        } catch {
+          img = await loadImage(source.src);
+        }
+        if (!alive) return;
+        const mask = buildMask(img, source);
+        const before = greysPlate(mask);
+        const after = shadePlate(mask, shade.hex, shade.glow);
+        s.cache[slug] = { mask, before, after };
+        s.mask = mask;
+        s.before = before;
+        s.after = after;
+        s.radius = Math.min(s.radius, 40);
+        setReady(true);
+        measure();
+      } catch {
+        /* image failed — the static fallback photo stays visible */
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [shade, source, measure]);
 
   useEffect(() => {
     if (!ready) return undefined;
@@ -160,8 +203,8 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
       const idle = now - s.lastMove > 2500;
       if (idle && !reduce && mode === "paint") {
         const t = (now - s.t0) / 1000;
-        s.mouse.x = ox + (SOURCE.focus.x + Math.sin(t * 0.55) * 0.16) * sw;
-        s.mouse.y = oy + (SOURCE.focus.y + Math.sin(t * 0.37 + 1.3) * 0.3) * sh;
+        s.mouse.x = ox + (source.focus.x + Math.sin(t * 0.55) * 0.16) * sw;
+        s.mouse.y = oy + (source.focus.y + Math.sin(t * 0.37 + 1.3) * 0.3) * sh;
       }
       s.smooth.x += (s.mouse.x - s.smooth.x) * 0.1;
       s.smooth.y += (s.mouse.y - s.smooth.y) * 0.1;
@@ -306,11 +349,11 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
             onPointerMove={onPointer}
             onPointerDown={onPointer}
             role="img"
-            aria-label={`${SOURCE.alt}, shown with simulated greys; the ${shade.name} shade is painted in where you point.`}
+            aria-label={`${source.alt}, shown with simulated greys; the ${shade.name} shade is painted in where you point.`}
           >
             {/* static fallback before JS/plates are ready */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.fallback} src={`/_next/image?url=${encodeURIComponent(SOURCE.src)}&w=1080&q=75`} alt="" aria-hidden="true" />
+            <img key={source.src} className={styles.fallback} src={source.src} alt={source.alt} aria-hidden="true" />
             <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
 
             {ready

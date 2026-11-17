@@ -171,7 +171,7 @@ export const RESULTS = [
   { id: "res1", shade: "natural-black", age: 52, hairType: "Straight", before: IMG.greyWoman, after: IMG.heroWoman, note: "Temple greys, one application" },
   { id: "res2", shade: "burgundy-wine", age: 34, hairType: "Wavy", before: IMG.youngWoman, after: IMG.festive, note: "Dark brown base to wine-red" },
   { id: "res3", shade: "espresso-dark-brown", age: 44, hairType: "Thick", before: IMG.greyMan, after: IMG.saltPepper, note: "Salt-and-pepper softened" },
-  { id: "res4", shade: "chestnut-brown", age: 26, hairType: "Straight", before: IMG.backHair, after: IMG.longBrownBack, note: "Black base, warm lift" },
+  { id: "res4", shade: "chestnut-brown", age: 26, hairType: "Straight", before: IMG.greyWoman, after: IMG.heroAlt, note: "Black base, warm lift" },
   { id: "res5", shade: "mahogany", age: 29, hairType: "Curly", before: IMG.youngDark, after: IMG.goldenLight, note: "Red glint on curls" },
 ];
 

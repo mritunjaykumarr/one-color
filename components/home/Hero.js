@@ -8,7 +8,7 @@ import { PiArrowRight } from "react-icons/pi";
 import BottleBlueprint from "../brand/BottleBlueprint";
 import Stars from "../ui/Stars";
 import { useUI } from "../layout/UIProvider";
-import { IMG } from "../../data/media";
+import { IMG, SHADE_IMAGES } from "../../data/media";
 import { RATING } from "../../data/content";
 import styles from "./Hero.module.scss";
 
@@ -118,7 +118,16 @@ export default function Hero({ shades }) {
             animate={{ clipPath: "inset(0% 0 0 0 round 999px 999px 28px 28px)" }}
             transition={{ duration: 1.3, ease: EASE, delay: 0.1 }}
           >
-            <Image src={IMG.heroWoman.src} alt={IMG.heroWoman.alt} fill preload loading="eager" sizes="(min-width: 900px) 46vw, 88vw" className={styles.photo} />
+            <Image
+              key={shade.imageKey}
+              src={(SHADE_IMAGES[shade.imageKey]?.portrait || IMG.heroWoman).src}
+              alt={(SHADE_IMAGES[shade.imageKey]?.portrait || IMG.heroWoman).alt}
+              fill
+              preload
+              loading="eager"
+              sizes="(min-width: 900px) 46vw, 88vw"
+              className={styles.photo}
+            />
           </motion.div>
 
           <motion.div
@@ -132,7 +141,7 @@ export default function Hero({ shades }) {
               <span className={styles.discCap}>Fig. 1 · Dual chamber, 1:1</span>
             </span>
           </motion.div>
-          <p className={`ph-note ${styles.phNote}`}>Product drawing &amp; photo: placeholders</p>
+          <p className={`ph-note ${styles.phNote}`}>Product drawing: placeholder · Photography: OneColor collection</p>
         </div>
       </div>
     </section>
