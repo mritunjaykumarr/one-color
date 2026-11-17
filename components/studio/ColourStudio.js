@@ -16,7 +16,7 @@ import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { PiHeart, PiHeartFill, PiPlus } from "react-icons/pi";
 import Price from "../ui/Price";
 import { useCart } from "../cart/CartProvider";
-import { loadImage, buildMask, greysPlate, shadePlate } from "../../lib/hairTint";
+import { loadImage, buildMask, cleanPlate, shadePlate } from "../../lib/hairTint";
 import styles from "./ColourStudio.module.scss";
 import FlashText from "../ui/FlashText";
 
@@ -160,7 +160,7 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
         }
         if (!alive) return;
         const mask = buildMask(img, source);
-        const before = greysPlate(mask);
+        const before = cleanPlate(mask);
         const after = shadePlate(mask, shade.hex, shade.glow);
         s.cache[slug] = { mask, before, after };
         s.mask = mask;
@@ -349,7 +349,7 @@ export default function ColourStudio({ shades, initial = 4, compact = false }) {
             onPointerMove={onPointer}
             onPointerDown={onPointer}
             role="img"
-            aria-label={`${source.alt}, shown with simulated greys; the ${shade.name} shade is painted in where you point.`}
+            aria-label={`${source.alt}; the ${shade.name} shade is highlighted as you hover or move across the hair.`}
           >
             {/* static fallback before JS/plates are ready */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
